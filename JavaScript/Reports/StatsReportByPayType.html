@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Get Stats Report (By Payment Type)</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <button id="reportButton">Get Statistics Report by Payment Type</button>
+    <div id="result"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script>
+      var baseUrl = 'https://secure.petexec.net/api';
+      $('#reportButton').on('click', getReport);
+
+      var token = ''; // Your token
+      var startDate = ''; // yyyy-mm-dd
+      var endDate = ''; // yyyy-mm-dd
+      var payType = ''; // Cash, Check, Credit, Clover Mini, Tradeout, Refund, No Payment, Gift Certificate, Paw Point Redemption, Not Processed, Discount, Tax, Tip / Gratuity
+
+      function getReport(e) {
+        e.preventDefault();
+        $.ajax({
+          type : 'GET',
+          url : baseUrl + '/report/statistics-report/' + startDate + '/' + endDate + '/breakdown/' + payType,
+          dataType : 'json',
+          headers : {
+            'Authorization' : 'Bearer ' + token
+          },
+          success : successCallback,
+          error : errorCallback
+        });
+      }
+
+      function successCallback(data, textStatus, jqXHR) {
+        $('#result').html(textStatus + '' + JSON.stringify(data));
+      }
+
+      function errorCallback(jqXHR, textStatus, errorThrown) {
+        $('#result').html(JSON.stringify(jqXHR.responseJSON));
+      }
+    </script>
+  </body>
+</html>
+
