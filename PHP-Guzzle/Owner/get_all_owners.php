@@ -9,6 +9,10 @@
 <body>
   <h1>Get All Active Owners</h1>
   <?php 
+
+    // --- REQUIRES GUZZLE --- 
+    // http://docs.guzzlephp.org/en/latest/overview.html#installation
+
     require 'vendor/autoload.php';
     use GuzzleHttp\Client;
     use GuzzleHttp\Psr7;
@@ -25,8 +29,8 @@
 
       $base64_client = base64_encode($client_id . ':' . $client_secret);
 
-      $username = '';
-      $password = '';
+      $username = ''; // Enter your username
+      $password = ''; // Enter your password
 
       $params = array(
         'username' => $username,
