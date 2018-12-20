@@ -23,25 +23,28 @@
       'timeout' => 2.0,
     ]);
 
-    try {
-      $client_id = ''; // Enter your client id
+    try {    
+
+      // --- Fill out everything below ---
+      $client_id = ''; // Your client id
       $client_secret = ''; // Public apps should not expose client secret
-
-      $base64_client = base64_encode($client_id . ':' . $client_secret);
-
-      $username = ''; // Enter your username
-      $password = ''; // Enter your password
+      $username = ''; // Your username
+      $password = ''; // Your password
 
       $startDate = ''; // yyyy-mm-dd
       $endDate = ''; // yyyy-mm-dd
       $payType = ''; // All Types, Cash, Check, Credit, Clover Mini, Gift Certificate, No Payment, Paw Point Redemption, Refund, Tradeout, Unprocessed
       $ownerPortal = ''; // yes, no
+      $desiredScope = 'report_read'; //Enter desired scope in space separated list
+      // ---------------------------------
+
+      $base64_client = base64_encode($client_id . ':' . $client_secret);
 
       $params = array(
         'username' => $username,
         'password' => $password,
         'grant_type' => 'password',
-        'scope' => 'report_read' // Enter desired scopes in space separated list
+        'scope' => $desiredScope,
       );
 
       $headers = array(
